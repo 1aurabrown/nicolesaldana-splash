@@ -34,7 +34,7 @@ submitSubscribeForm = ($form, $successEl, $errorEl) ->
       if (data.result == "success") || (data.msg && data.msg.indexOf("already subscribed") >= 0)
         $successEl.show()
         $form.find("input[type='email']").hide()
-        $successEl.html "Thank you!"
+        $successEl.html "thank you, we will be in touch soon!"
         $successEl.show()
       else
         $errorEl.html "Please check the email you entered!"
