@@ -1,0 +1,105 @@
+@require mixins
+
+* {
+  font-family "Zurich W02 Bold"
+  box-sizing: border-box;
+}
+html, body
+  font-size 15.5px
+  margin 0
+
+#main
+  margin 0 60px
+
+#content
+  height 100vh
+  min-height 500px
+  min-width 700px
+  max-width 1400px
+  padding 30px
+  margin auto
+  display flex
+  flex-direction column
+  flex-wrap nowrap
+  justify-content space-between
+  align-items center
+  > *
+    width 100%
+
+#header
+  flex-grow 0
+  text-align center
+  height 83px
+  background-repeat no-repeat
+  background-position center
+  background-size contain
+
+#splash-images
+  margin 5px 0 20px 0
+  flex-grow 1
+  display flex
+  flex-direction row
+  justify-content center
+  align-items stretch
+.splash-image
+  flex-grow 1
+  background-size cover
+  background-position center
+
+#footer
+  display flex
+  flex-direction row
+  form
+    display inline-block
+  .icon-mail
+  .icon-instagram
+  .icon-arrow
+    display inline-block
+    background-size contain
+    background-repeat no-repeat
+    background-position center
+  .icon-arrow
+    width 26px
+    height 22px
+    position absolute
+    right 0
+    bottom 0
+  .icon-mail
+  .icon-instagram
+    width 23px
+    height 22px
+  .icon-instagram
+    margin-right 22px
+  .icon-mail
+    margin-right 3px
+#email-entry
+  margin-right 32px
+  border-bottom 2px solid black
+  flex-grow 1
+  padding-bottom 2px
+  form
+    position relative
+    padding-right 30px
+    width 100%
+  input.email
+    width 100%
+    border none
+    font-size 1em
+    &:focus
+      outline none
+      outline-offset 0
+      +placeholder()
+        opacity 0
+    +placeholder()
+      color black
+
+  input.submit
+    display: none
+
+#subscribe-error
+  color: red
+  height: 20px
+#subscribe-success
+  display none
+
+

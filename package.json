@@ -7,7 +7,11 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "express-coffee-script": "^0.2.0",
+    "nib": "^1.1.2",
+    "pug": "^2.0.0-rc.2",
+    "stylus": "^0.54.5"
   },
   "engines": {
     "node": "4.0.0"
