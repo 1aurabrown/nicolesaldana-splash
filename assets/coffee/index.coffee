@@ -57,21 +57,35 @@ class EmailForm
           @$form.find("input[type='submit']").prop('disabled', false)
           @showError()
 
-classForViewport = ->
+checkViewportSize = (isFlickity) ->
+  $carousel = $('#splash-images')
+
   ratio = $(window).width()/$(window).height()
+  debugger
   if ratio < .9
     $('body').addClass 'is-skinny'
+    if not isFlickity
+      _.defer ->
+      $carousel.flickity
+        cellAlign: 'left'
+        wrapAround: 'true'
+        setGallerySize: false
+      isFlickity = true
   else
     $('body').removeClass 'is-skinny'
+    if isFlickity
+      $carousel.flickity('destroy')
+      isFlickity = false
 
-$(document).ready ->
-  classForViewport()
-  $(window).resize _.debounce =>
-    classForViewport()
-  window.form = new EmailForm(
-    $("#subscribe-form"),
-    $("#subscribe-form input[type='email']"),
-    $("#subscribe-form #fake-placeholder"),
-    $("#subscribe-form #subscribe-success"),
-    $("#subscribe-error")
-  )
+  return isFlickity
+
+window.form = new EmailForm(
+  $("#subscribe-form"),
+  $("#subscribe-form input[type='email']"),
+  $("#subscribe-form #fake-placeholder"),
+  $("#subscribe-form #subscribe-success"),
+  $("#subscribe-error")
+)
+isFlickity = checkViewportSize(isFlickity)
+$(window).resize _.debounce ->
+  isFlickity = checkViewportSize(isFlickity)

@@ -1,4 +1,4 @@
-var EmailForm, classForViewport,
+var EmailForm, checkViewportSize, isFlickity,
   bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 EmailForm = (function() {
@@ -87,22 +87,39 @@ EmailForm = (function() {
 
 })();
 
-classForViewport = function() {
-  var ratio;
+checkViewportSize = function(isFlickity) {
+  var $carousel, ratio;
+  console.log(isFlickity);
+  $carousel = $('#splash-images');
   ratio = $(window).width() / $(window).height();
+  debugger;
   if (ratio < .9) {
-    return $('body').addClass('is-skinny');
+    $('body').addClass('is-skinny');
+    if (!isFlickity) {
+      _.defer(function() {});
+      $carousel.flickity({
+        cellAlign: 'left',
+        wrapAround: 'true',
+        setGallerySize: false
+      });
+      isFlickity = true;
+    }
   } else {
-    return $('body').removeClass('is-skinny');
+    $('body').removeClass('is-skinny');
+    if (isFlickity) {
+      $carousel.flickity('destroy');
+      isFlickity = false;
+    }
   }
+  return isFlickity;
 };
 
-$(document).ready(function() {
-  classForViewport();
-  $(window).resize(_.debounce((function(_this) {
-    return function() {
-      return classForViewport();
-    };
-  })(this)));
-  return window.form = new EmailForm($("#subscribe-form"), $("#subscribe-form input[type='email']"), $("#subscribe-form #fake-placeholder"), $("#subscribe-form #subscribe-success"), $("#subscribe-error"));
-});
+window.form = new EmailForm($("#subscribe-form"), $("#subscribe-form input[type='email']"), $("#subscribe-form #fake-placeholder"), $("#subscribe-form #subscribe-success"), $("#subscribe-error"));
+
+isFlickity = false;
+
+isFlickity = checkViewportSize(isFlickity);
+
+$(window).resize(_.debounce(function() {
+  return isFlickity = checkViewportSize(isFlickity);
+}));
