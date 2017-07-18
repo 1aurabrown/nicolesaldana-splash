@@ -1,30 +1,25 @@
-doctype html
-html
-  head
-    include head
+extends ./layout
+block content
+  #header(style="background-image: url('/images/logo.svg')")
+  #splash-images
+    .splash-image( style= "background-image: url('/images/splash_image_1.jpg')")
+    .splash-image( style= "background-image: url('/images/splash_image_2.jpg')")
+    .splash-image( style= "background-image: url('/images/splash_image_3.jpg')")
+  #footer
+    #email-entry
+      form#subscribe-form(method='POST' action="//nicolesaldana.us16.list-manage.com/subscribe/post" novalidate)
+        input(type="hidden" name="u" value="a1abc19c419745acc7b99627b")
+        input(type="hidden" name="id" value="228595019e")
+        input.email(type='email', name='EMAIL' placeholder='')
+        label
+          a.icon-arrow(
+            style="background-image: url('/icons/arrow.svg')"
+          )
+          input(class='submit' type='submit' value='Submit')
+        #subscribe-success thank you, we will be in touch soon!
+        #fake-placeholder leave&nbsp;us&nbsp;your&nbsp;email&nbsp;to&nbsp;be&nbsp;notified when&nbsp;we&nbsp;launch
+        #subscribe-error please check the email you entered!
+    a.icon-instagram( style="background-image: url('/icons/instagram.svg')" href="https://www.instagram.com/nicole_saldana" target="_blank")
+    a.icon-mail(style="background-image: url('/icons/mail.svg')" href="mailto:info@nicolesaldana.com" target="_blank")
 
-  body
-    #main
-      #content
-        #header(style="background-image: url('/images/logo.svg')")
-        #splash-images
-          .splash-image( style= "background-image: url('/images/splash_image_1.jpg')")
-          .splash-image( style= "background-image: url('/images/splash_image_2.jpg')")
-          .splash-image( style= "background-image: url('/images/splash_image_3.jpg')")
-        #footer
-          #email-entry
-            form#subscribe-form(method='POST' action="//nicolesaldana.us16.list-manage.com/subscribe/post" novalidate)
-              input(type="hidden" name="u" value="a1abc19c419745acc7b99627b")
-              input(type="hidden" name="id" value="228595019e")
-              input.email(type='email', name='EMAIL' placeholder='leave us your email to be notified when we launch' required)
-              label
-                a.icon-arrow(
-                  style="background-image: url('/icons/arrow.png')"
-                )
-                input(class='submit' type='submit' value='Submit')
-              #subscribe-success Hello
 
-          a.icon-instagram( style="background-image: url('/icons/instagram.png')" href="https://www.instagram.com/nicole_saldana" target="_blank")
-          a.icon-mail(style="background-image: url('/icons/mail.png')" href="mailto:info@nicolesaldana.com" target="_blank")
-
-        #subscribe-error

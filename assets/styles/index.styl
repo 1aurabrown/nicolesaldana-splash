@@ -1,35 +1,35 @@
 @require mixins
 
-* {
-  font-family "Zurich W02 Bold"
-  box-sizing: border-box;
-}
+maxWidth = 1400px
+minMargin = 60px
+
 html, body
   font-size 15.5px
+
+*
+  font-family "Zurich W02 Bold"
+  box-sizing: border-box;
+
+html, body
   margin 0
-
 #main
-  margin 0 60px
-
+  margin 0 minMargin
 #content
   height 100vh
-  min-height 500px
-  min-width 700px
-  max-width 1400px
-  padding 30px
+  // min-width 700px
+  max-width maxWidth
   margin auto
   display flex
   flex-direction column
   flex-wrap nowrap
-  justify-content space-between
-  align-items center
-  > *
-    width 100%
+  justify-content space-around
+  align-items stretch
 
 #header
+  flex-basis 83px
   flex-grow 0
+  flex-shrink 0
   text-align center
-  height 83px
   background-repeat no-repeat
   background-position center
   background-size contain
@@ -37,16 +37,19 @@ html, body
 #splash-images
   margin 5px 0 20px 0
   flex-grow 1
+  flex-shrink 1
   display flex
-  flex-direction row
-  justify-content center
-  align-items stretch
+
 .splash-image
-  flex-grow 1
-  background-size cover
+  background-repeat no-repeat
   background-position center
+  background-size cover
+  display inline-block
+  width 33.33%
 
 #footer
+  flex-grow 0
+  flex-shrink 0
   display flex
   flex-direction row
   form
@@ -72,14 +75,17 @@ html, body
     margin-right 22px
   .icon-mail
     margin-right 3px
+
+formPadding = 30px
 #email-entry
   margin-right 32px
   border-bottom 2px solid black
   flex-grow 1
   padding-bottom 2px
   form
+    height 1.5em
     position relative
-    padding-right 30px
+    padding-right formPadding
     width 100%
   input.email
     width 100%
@@ -88,18 +94,75 @@ html, body
     &:focus
       outline none
       outline-offset 0
-      +placeholder()
-        opacity 0
-    +placeholder()
-      color black
-
+  #subscribe-success
+  #fake-placeholder
+    position absolute
+    bottom 2px
+    padding-right formPadding
+  #subscribe-success
+    visibility hidden
+  #fake-placeholder
+    pointer-events none
   input.submit
-    display: none
+    display none
 
 #subscribe-error
-  color: red
-  height: 20px
-#subscribe-success
-  display none
+  color red
+  height 20px
+  visibility hidden
+  position absolute
+  transform translateY(.6em)
 
+#content
+  padding 30px 0 45px 0
+@media only screen and (max-width: 670px)
+  html, body
+    font-size 12px
+@media only screen and (max-width: 600px)
+  #header
+    flex-basis 9vh
+    min-height 30px
+  #footer
+    flex-wrap wrap
+  #email-entry
+    width 100%
+    margin-right 0
+    margin-bottom 20px
+  .is-skinny
+    #main
+      margin 0 0
+    #content
+      padding 15px 0 45px 0
+    #footer
+      padding 0 20px
+    #splash-images
+      min-height 0
+      max-height 110vw
+      flex-grow 0
+      flex-basis 54vh
+      overflow auto
+      white-space nowrap
+      display block
+    .splash-image
+      width 66.66%
+      height 100%
+
+
+// Width at which placeholder breaks
+
+@media only screen and (max-width: 460px)
+  #footer
+    margin-top 1.3em
+
+// Desktop screens before hitting max width, portrait phones
+// @media only screen and (min-width: 781px) and (max-width: (maxWidth + (minMargin * 2) - 1)), screen and (max-width: 780px) and (orientation: landscape)
+#splash-images
+  max-height "calc(55vw - (%s * 2 * .55))" % minMargin
+  min-height "calc(40vw - (%s * 2 * .4))" % minMargin
+
+// After max content width is reached
+@media only screen and (min-width: (maxWidth + (minMargin * 2)))
+  #splash-images
+    max-height .55 * maxWidth
+    min-height .4 * maxWidth
 
