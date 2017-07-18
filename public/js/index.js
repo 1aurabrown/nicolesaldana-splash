@@ -88,14 +88,16 @@ EmailForm = (function() {
 })();
 
 checkViewportSize = function(isFlickity) {
-  var $carousel, ratio;
+  var $carousel, isSkinny, ratio, width;
   $carousel = $('#splash-images');
-  ratio = $(window).width() / $(window).height();
-  debugger;
-  if (ratio < .9) {
+  ratio = (width = $(window).width()) / $(window).height();
+  if (isSkinny = ratio < .9) {
     $('body').addClass('is-skinny');
+  } else {
+    $('body').removeClass('is-skinny');
+  }
+  if (width < 600 && isSkinny) {
     if (!isFlickity) {
-      _.defer(function() {});
       $carousel.flickity({
         cellAlign: 'left',
         wrapAround: 'true',
@@ -106,7 +108,6 @@ checkViewportSize = function(isFlickity) {
       isFlickity = true;
     }
   } else {
-    $('body').removeClass('is-skinny');
     if (isFlickity) {
       $carousel.flickity('destroy');
       isFlickity = false;

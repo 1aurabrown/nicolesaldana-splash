@@ -60,12 +60,14 @@ class EmailForm
 checkViewportSize = (isFlickity) ->
   $carousel = $('#splash-images')
 
-  ratio = $(window).width()/$(window).height()
-  debugger
-  if ratio < .9
+  ratio = (width = $(window).width())/$(window).height()
+  if isSkinny = ratio < .9
     $('body').addClass 'is-skinny'
+  else
+    $('body').removeClass 'is-skinny'
+
+  if width < 600 and isSkinny
     if not isFlickity
-      _.defer ->
       $carousel.flickity
         cellAlign: 'left'
         wrapAround: 'true'
@@ -74,7 +76,6 @@ checkViewportSize = (isFlickity) ->
         pageDots: false
       isFlickity = true
   else
-    $('body').removeClass 'is-skinny'
     if isFlickity
       $carousel.flickity('destroy')
       isFlickity = false
