@@ -57,38 +57,39 @@ class EmailForm
           @$form.find("input[type='submit']").prop('disabled', false)
           @showError()
 
-checkViewportSize = (isFlickity) ->
-  $carousel = $('#splash-images')
+$(document).ready ->
+  checkViewportSize = (isFlickity) ->
+    $carousel = $('#splash-images')
 
-  ratio = (width = $(window).width())/$(window).height()
-  if isSkinny = ratio < .9
-    $('body').addClass 'is-skinny'
-  else
-    $('body').removeClass 'is-skinny'
+    ratio = (width = $(window).width())/$(window).height()
+    if isSkinny = ratio < .9
+      $('body').addClass 'is-skinny'
+    else
+      $('body').removeClass 'is-skinny'
 
-  if width < 600 and isSkinny
-    if not isFlickity
-      $carousel.flickity
-        cellAlign: 'left'
-        wrapAround: 'true'
-        setGallerySize: false
-        prevNextButtons: false
-        pageDots: false
-      isFlickity = true
-  else
-    if isFlickity
-      $carousel.flickity('destroy')
-      isFlickity = false
+    if width < 600 and isSkinny
+      if not isFlickity
+        $carousel.flickity
+          cellAlign: 'left'
+          wrapAround: 'true'
+          setGallerySize: false
+          prevNextButtons: false
+          pageDots: false
+        isFlickity = true
+    else
+      if isFlickity
+        $carousel.flickity('destroy')
+        isFlickity = false
 
-  return isFlickity
+    return isFlickity
 
-window.form = new EmailForm(
-  $("#subscribe-form"),
-  $("#subscribe-form input[type='email']"),
-  $("#subscribe-form #fake-placeholder"),
-  $("#subscribe-form #subscribe-success"),
-  $("#subscribe-error")
-)
-isFlickity = checkViewportSize(isFlickity)
-$(window).resize _.debounce ->
+  window.form = new EmailForm(
+    $("#subscribe-form"),
+    $("#subscribe-form input[type='email']"),
+    $("#subscribe-form #fake-placeholder"),
+    $("#subscribe-form #subscribe-success"),
+    $("#subscribe-error")
+  )
   isFlickity = checkViewportSize(isFlickity)
+  $(window).resize _.debounce ->
+    isFlickity = checkViewportSize(isFlickity)

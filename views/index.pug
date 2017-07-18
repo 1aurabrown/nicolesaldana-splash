@@ -2,9 +2,14 @@ extends ./layout
 block content
   #header(style="background-image: url('/images/logo.svg')")
   #splash-images
-    .splash-image( style= "background-image: url('/images/splash_image_1.jpg')")
-    .splash-image( style= "background-image: url('/images/splash_image_2.jpg')")
-    .splash-image( style= "background-image: url('/images/splash_image_3.jpg')")
+    img.splash-image(
+      src='/images/1_1x.jpg'
+      srcset="/images/1_1x.jpg 1x, /images/1_2x.jpg 2x"
+    )
+    img.splash-image(
+      src='/images/2_1x.jpg'
+      srcset="/images/2_1x.jpg 1x, /images/2_2x.jpg 2x"
+    )
   #footer
     #email-entry
       form#subscribe-form(method='POST' action="//nicolesaldana.us16.list-manage.com/subscribe/post" novalidate)
