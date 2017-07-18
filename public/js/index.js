@@ -89,7 +89,6 @@ EmailForm = (function() {
 
 checkViewportSize = function(isFlickity) {
   var $carousel, ratio;
-  console.log(isFlickity);
   $carousel = $('#splash-images');
   ratio = $(window).width() / $(window).height();
   debugger;
@@ -100,7 +99,9 @@ checkViewportSize = function(isFlickity) {
       $carousel.flickity({
         cellAlign: 'left',
         wrapAround: 'true',
-        setGallerySize: false
+        setGallerySize: false,
+        prevNextButtons: false,
+        pageDots: false
       });
       isFlickity = true;
     }
@@ -115,8 +116,6 @@ checkViewportSize = function(isFlickity) {
 };
 
 window.form = new EmailForm($("#subscribe-form"), $("#subscribe-form input[type='email']"), $("#subscribe-form #fake-placeholder"), $("#subscribe-form #subscribe-success"), $("#subscribe-error"));
-
-isFlickity = false;
 
 isFlickity = checkViewportSize(isFlickity);
 

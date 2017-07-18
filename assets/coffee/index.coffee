@@ -70,6 +70,8 @@ checkViewportSize = (isFlickity) ->
         cellAlign: 'left'
         wrapAround: 'true'
         setGallerySize: false
+        prevNextButtons: false
+        pageDots: false
       isFlickity = true
   else
     $('body').removeClass 'is-skinny'
